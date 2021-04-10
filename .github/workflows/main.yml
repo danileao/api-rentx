@@ -25,6 +25,9 @@ jobs:
       - name: Build
         run: yarn build
         
+      - name: Test
+        run: yarn test
+        
 
       - uses: appleboy/scp-action@master
         with:
