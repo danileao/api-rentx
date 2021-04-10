@@ -25,9 +25,7 @@ jobs:
       - name: Build
         run: yarn build
         
-      - name: Test
-        run: yarn test
-        
+
       - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -37,3 +35,11 @@ jobs:
           source: "., !node_modules"
           target: "~/app/api-rentx"
       
+      - name: Install dependencies
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: cd ~/app/api-rentx && yarn test
